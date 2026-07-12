@@ -17,13 +17,13 @@ def get_password_hash(password: str) -> str:
     return pwd_context.hash(password)
 
 def seed_data():
+    print("Rebuilding database schemas...")
+    from sqlmodel import SQLModel
+    # Drop all tables first to cleanly update SQLite column changes
+    SQLModel.metadata.drop_all(engine)
     create_db_and_tables()
-    with Session(engine) as session:
-        # Check if already seeded
-        if session.exec(select(Department)).first():
-            print("Database already seeded.")
-            return
 
+    with Session(engine) as session:
         print("Seeding database...")
         # Departments
         hq = Department(name="Global HQ", code="GHQ", employee_count=5)
@@ -35,6 +35,7 @@ def seed_data():
         session.refresh(hq)
         session.refresh(it)
         session.refresh(ops)
+        session.refresh(hr)
 
         # Employees
         admin = Employee(
@@ -75,6 +76,8 @@ def seed_data():
         session.add_all([admin, hr_head, it_head, auditor, emp1, emp2, emp3])
         session.commit()
         session.refresh(emp1)
+        session.refresh(emp2)
+        session.refresh(emp3)
         session.refresh(admin)
 
         # Categories
@@ -85,6 +88,17 @@ def seed_data():
         session.commit()
         session.refresh(cat_energy)
         session.refresh(cat_community)
+        session.refresh(cat_waste)
+
+        # CSR Activities
+        act1 = CSRActivity(title="Tree Planting Drive", category_id=cat_community.id, points_value=50, evidence_required=True, description="Volunteer to plant trees in the urban forest reserve.")
+        act2 = CSRActivity(title="Community Recycling Day", category_id=cat_waste.id, points_value=30, evidence_required=False, description="Bring recyclable household materials to our central waste station.")
+        act3 = CSRActivity(title="Inclusion Workshop Facilitation", category_id=cat_community.id, points_value=100, evidence_required=True, description="Facilitate or speak at our annual diversity and inclusive workplace forum.")
+        session.add_all([act1, act2, act3])
+        session.commit()
+        session.refresh(act1)
+        session.refresh(act2)
+        session.refresh(act3)
 
         # Emission Factors
         ef_elec = EmissionFactor(activity_type="Grid Electricity", unit="kWh", co2e_per_unit=0.4)
@@ -98,14 +112,13 @@ def seed_data():
         badge_novice = Badge(name="Eco Novice", description="Earned 100 XP", unlock_rule_json=json.dumps({"metric": "xp_total", "operator": ">=", "value": 100}), icon="leaf")
         badge_master = Badge(name="Eco Master", description="Completed 3 challenges", unlock_rule_json=json.dumps({"metric": "completed_challenges", "operator": ">=", "value": 3}), icon="tree")
         badge_wealthy = Badge(name="Points Hoarder", description="Accumulate 500 points", unlock_rule_json=json.dumps({"metric": "points_balance", "operator": ">=", "value": 500}), icon="coins")
-        
-        # Seed Badges
         b1 = Badge(name="Green Beginner", description="Join your first CSR activity", unlock_rule_json='{"metric": "completed_challenges", "operator": ">=", "value": 1}', icon="🌱")
-        
+        session.add_all([badge_novice, badge_master, badge_wealthy, b1])
+        session.commit()
+
         # Seed Products
         p1 = ProductESGProfile(name="Eco-Friendly Notebook", carbon_footprint_per_unit=2.5, sustainability_rating="A")
-        
-        session.add_all([badge_novice, badge_master, badge_wealthy, b1, p1])
+        session.add(p1)
         session.commit()
 
         # Rewards
@@ -119,6 +132,8 @@ def seed_data():
         ch2 = Challenge(title="Zero Waste Lunch", category_id=cat_waste.id, description="Bring a zero waste lunch", xp=20, difficulty="Easy", evidence_required=False, deadline=datetime.utcnow() + timedelta(days=2), status=ChallengeStatusEnum.Draft)
         session.add_all([ch1, ch2])
         session.commit()
+        session.refresh(ch1)
+        session.refresh(ch2)
 
         # Audits & Compliance
         audit1 = Audit(dept_id=ops.id, scope="Q3 Operations Review", date_range_start=datetime.utcnow()-timedelta(days=60), date_range_end=datetime.utcnow(), status=IssueStatusEnum.Open)
@@ -150,12 +165,60 @@ def seed_data():
         pol2 = ESGPolicy(title="Server Energy Efficiency Standard", body="All server hardware must comply with Energy Star certification. Idle systems must be powered down.", effective_date=datetime.utcnow() - timedelta(days=30))
         session.add_all([pol1, pol2])
         session.commit()
+        session.refresh(pol1)
+        session.refresh(pol2)
 
         # Seed Policy Acknowledgements
         ack1 = PolicyAcknowledgement(policy_id=pol1.id, employee_id=emp1.id)
         ack2 = PolicyAcknowledgement(policy_id=pol2.id, employee_id=emp1.id)
         ack3 = PolicyAcknowledgement(policy_id=pol1.id, employee_id=emp2.id)
         session.add_all([ack1, ack2, ack3])
+        session.commit()
+
+        # Seed Employee Participations & Challenge Participations
+        p_csr1 = EmployeeParticipation(
+            employee_id=emp1.id, activity_id=act1.id,
+            proof_url="http://proof.url/tree_planting.jpg",
+            proof_description="Planted 5 oak saplings in Section B.",
+            approval_status=ApprovalStatusEnum.Pending,
+            completion_date=datetime.utcnow() - timedelta(days=1)
+        )
+        p_csr2 = EmployeeParticipation(
+            employee_id=emp2.id, activity_id=act2.id,
+            proof_url=None,
+            proof_description="Brought 5kg of aluminum cans for recycling.",
+            approval_status=ApprovalStatusEnum.Pending,
+            completion_date=datetime.utcnow() - timedelta(days=2)
+        )
+        p_challenge1 = ChallengeParticipation(
+            challenge_id=ch1.id, employee_id=emp1.id,
+            proof_url="http://proof.url/bike_gps.png",
+            proof_description="Biked 12km to work, GPS route screenshot attached.",
+            approval=ApprovalStatusEnum.Pending
+        )
+        session.add_all([p_csr1, p_csr2, p_challenge1])
+        session.commit()
+        session.refresh(p_csr1)
+        session.refresh(p_csr2)
+        session.refresh(p_challenge1)
+
+        # Seed Verified Impact records
+        vi1 = VerifiedImpact(
+            employee_id=emp1.id, participation_type="CSR", participation_id=p_csr1.id,
+            activity_title=act1.title, impact_value=15.0, impact_metric="volunteer hours",
+            status="Pending"
+        )
+        vi2 = VerifiedImpact(
+            employee_id=emp2.id, participation_type="CSR", participation_id=p_csr2.id,
+            activity_title=act2.title, impact_value=5.0, impact_metric="kg waste reduced",
+            status="Pending"
+        )
+        vi3 = VerifiedImpact(
+            employee_id=emp1.id, participation_type="Challenge", participation_id=p_challenge1.id,
+            activity_title=ch1.title, impact_value=4.8, impact_metric="kg CO2e avoided",
+            status="Pending"
+        )
+        session.add_all([vi1, vi2, vi3])
         session.commit()
 
         # Calculate initial scores

@@ -7,6 +7,10 @@ def evaluate_badges(session: Session, employee_id: int):
     Evaluates all badges against the employee's stats.
     If a rule is met and the employee doesn't have the badge, award it and create a notification.
     """
+    # Respect the Badge Auto-Award global toggle
+    if not APP_SETTINGS.get("badge_auto_award", True):
+        return
+
     employee = session.exec(select(Employee).where(Employee.id == employee_id)).first()
     if not employee:
         return
@@ -31,7 +35,6 @@ def evaluate_badges(session: Session, employee_id: int):
             elif metric == "points_balance":
                 current_value = employee.points_balance
             elif metric == "completed_challenges":
-                # Calculate completed challenges dynamically if not stored on Employee
                 from models import ChallengeParticipation, ApprovalStatusEnum
                 participations = session.exec(
                     select(ChallengeParticipation)
@@ -39,6 +42,23 @@ def evaluate_badges(session: Session, employee_id: int):
                     .where(ChallengeParticipation.approval == ApprovalStatusEnum.Approved)
                 ).all()
                 current_value = len(participations)
+            elif metric == "completed_activities":
+                from models import EmployeeParticipation, ApprovalStatusEnum
+                participations = session.exec(
+                    select(EmployeeParticipation)
+                    .where(EmployeeParticipation.employee_id == employee.id)
+                    .where(EmployeeParticipation.approval_status == ApprovalStatusEnum.Approved)
+                ).all()
+                current_value = len(participations)
+            elif metric == "verified_impact_co2e":
+                from models import VerifiedImpact
+                impacts = session.exec(
+                    select(VerifiedImpact)
+                    .where(VerifiedImpact.employee_id == employee.id)
+                    .where(VerifiedImpact.status == "Verified")
+                    .where(VerifiedImpact.impact_metric.like("%CO2e%"))
+                ).all()
+                current_value = sum(i.impact_value for i in impacts)
             
             # Evaluate rule
             is_met = False
@@ -71,6 +91,7 @@ def evaluate_badges(session: Session, employee_id: int):
 APP_SETTINGS = {
     "auto_emission_calc": True,
     "evidence_required": True,
+    "badge_auto_award": True,
     "w_env": 0.4,
     "w_social": 0.3,
     "w_gov": 0.3

@@ -154,6 +154,7 @@ class EmployeeParticipation(SQLModel, table=True):
     employee_id: int = Field(foreign_key="employee.id")
     activity_id: int = Field(foreign_key="csractivity.id")
     proof_url: Optional[str] = Field(default=None)
+    proof_description: Optional[str] = Field(default=None)
     approval_status: ApprovalStatusEnum = Field(default=ApprovalStatusEnum.Pending)
     points_earned: int = Field(default=0)
     completion_date: Optional[datetime] = Field(default=None)
@@ -175,6 +176,7 @@ class ChallengeParticipation(SQLModel, table=True):
     employee_id: int = Field(foreign_key="employee.id")
     progress: float = Field(default=0.0)
     proof_url: Optional[str] = Field(default=None)
+    proof_description: Optional[str] = Field(default=None)
     approval: ApprovalStatusEnum = Field(default=ApprovalStatusEnum.Pending)
     xp_awarded: int = Field(default=0)
 
@@ -230,3 +232,14 @@ class EmployeeBadge(SQLModel, table=True):
     employee_id: int = Field(foreign_key="employee.id")
     badge_id: int = Field(foreign_key="badge.id")
     awarded_at: datetime = Field(default_factory=datetime.utcnow)
+
+class VerifiedImpact(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    employee_id: int = Field(foreign_key="employee.id")
+    participation_type: str  # "CSR" or "Challenge"
+    participation_id: int
+    activity_title: str
+    impact_value: float
+    impact_metric: str  # "kg CO2e avoided", "kg waste reduced", "volunteer hours", "kWh saved"
+    status: str = Field(default="Claimed")  # "Claimed", "Pending", "Verified", "Rejected"
+    logged_at: datetime = Field(default_factory=datetime.utcnow)
