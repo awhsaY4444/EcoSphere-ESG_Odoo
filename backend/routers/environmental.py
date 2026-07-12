@@ -37,24 +37,6 @@ def create_carbon_transaction(tx: CarbonTransaction, session: Session = Depends(
     
     return tx
 
-<<<<<<< HEAD
-@router.get("/goals")
-def get_environmental_goals(session: Session = Depends(get_session)):
-    from models import EnvironmentalGoal
-    # For hackathon MVP we just return all goals
-    goals = session.exec(select(EnvironmentalGoal)).all()
-    # Add fake progress formatting for frontend mockup compatibility
-    results = []
-    for g in goals:
-        progress = int((g.current_value / g.target_value) * 100) if g.target_value > 0 else 0
-        status = "Completed" if progress >= 100 else ("Active" if progress > 0 else "Draft")
-        results.append({
-            "id": g.id,
-            "name": g.title,
-            "dept": "Department " + str(g.dept_id) if g.dept_id else "All",
-            "target": str(g.target_value) + " " + g.target_metric,
-            "current": str(g.current_value) + " " + g.target_metric,
-=======
 @router.put("/carbon-transactions/{tx_id}", response_model=CarbonTransaction)
 def update_carbon_transaction(tx_id: int, tx_data: dict, session: Session = Depends(get_session),
                               current_user: Employee = Depends(get_current_active_user)):
@@ -160,7 +142,6 @@ def get_environmental_goals(session: Session = Depends(get_session)):
             "dept_id": g.dept_id,
             "target": f"{g.target_value} {g.target_metric}",
             "current": f"{g.current_value} {g.target_metric}",
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
             "progress": progress,
             "deadline": g.deadline.strftime("%Y-%m-%d"),
             "status": status,
@@ -172,16 +153,6 @@ def get_environmental_goals(session: Session = Depends(get_session)):
 def create_environmental_goal(goal: dict, session: Session = Depends(get_session)):
     from models import EnvironmentalGoal
     from datetime import datetime
-<<<<<<< HEAD
-    new_goal = EnvironmentalGoal(
-        title=goal.get("title"),
-        target_metric=goal.get("target_metric"),
-        target_value=goal.get("target_value"),
-        current_value=0.0,
-        deadline=datetime.strptime(goal.get("deadline"), "%Y-%m-%d"),
-        dept_id=goal.get("dept_id")
-=======
-    
     dept_id_val = goal.get("dept_id")
     if dept_id_val == "" or dept_id_val == "All" or dept_id_val is None:
         dept_id_val = None
@@ -198,16 +169,10 @@ def create_environmental_goal(goal: dict, session: Session = Depends(get_session
         current_value=float(goal.get("current_value", 0)),
         deadline=datetime.strptime(goal.get("deadline"), "%Y-%m-%d"),
         dept_id=dept_id_val
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
     )
     session.add(new_goal)
     session.commit()
     session.refresh(new_goal)
-<<<<<<< HEAD
-    return new_goal
-
-=======
-    
     if dept_id_val:
         calculate_and_save_department_score(session, dept_id_val)
         
@@ -253,20 +218,13 @@ def update_environmental_goal(goal_id: int, goal_data: dict, session: Session = 
         calculate_and_save_department_score(session, goal.dept_id)
         
     return goal
-
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 @router.delete("/goals/{goal_id}")
 def delete_environmental_goal(goal_id: int, session: Session = Depends(get_session)):
     from models import EnvironmentalGoal
     goal = session.exec(select(EnvironmentalGoal).where(EnvironmentalGoal.id == goal_id)).first()
     if not goal:
         raise HTTPException(status_code=404, detail="Goal not found")
-<<<<<<< HEAD
-    session.delete(goal)
-    session.commit()
-    return {"ok": True}
 
-=======
     
     dept_id = goal.dept_id
     session.delete(goal)
@@ -1002,4 +960,3 @@ def get_evidence_graph(session: Session = Depends(get_session)):
             }
         ]
     }
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
