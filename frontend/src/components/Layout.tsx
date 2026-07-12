@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Leaf, Users, Shield, Trophy, FileText, Settings, LogOut, Bell, Earth, Info, X, Brain, Fingerprint, Compass, ShieldCheck } from 'lucide-react';
+import { LayoutDashboard, Leaf, Users, Shield, Trophy, FileText, Settings, LogOut, Bell, Earth, Info, X, Brain, Fingerprint, Compass, ShieldCheck, TrendingUp } from 'lucide-react';
 import api from '../api';
 import { toast } from '../utils/toast';
 
@@ -126,6 +126,7 @@ export default function Layout() {
     { name: 'Carbon DNA Lineage', path: '/carbon-dna', icon: <Fingerprint size={18} /> },
     { name: 'EcoPilot Assistant', path: '/ecopilot', icon: <Compass size={18} /> },
     { name: 'GreenShield AI', path: '/greenshield', icon: <ShieldCheck size={18} /> },
+    { name: 'EcoOptimizer', path: '/ecooptimizer', icon: <TrendingUp size={18} /> },
     { name: 'Social', path: '/social', icon: <Users size={18} /> },
     { name: 'Governance', path: '/governance', icon: <Shield size={18} /> },
     { name: 'Gamification', path: '/gamification', icon: <Trophy size={18} /> },

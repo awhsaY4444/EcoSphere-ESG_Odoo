@@ -261,3 +261,18 @@ class GreenShieldClaim(SQLModel, table=True):
     evidence_used: str
     verified_at: datetime = Field(default_factory=datetime.utcnow)
 
+
+class EcoOptimizerHistory(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    budget: float
+    target_dept: str
+    target_category: str
+    timeline: int
+    priority: str
+    recommended_portfolio: str
+    expected_esg_gain: float
+    carbon_reduction_pct: float
+    total_cost: float
+    optimized_at: datetime = Field(default_factory=datetime.utcnow)
+
+
