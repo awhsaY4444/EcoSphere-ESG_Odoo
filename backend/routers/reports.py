@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import PlainTextResponse
 from sqlmodel import Session, select
 from database import get_session
+from typing import Optional
 from models import (
     DepartmentScore, Department, CarbonTransaction, EmployeeParticipation, 
     ApprovalStatusEnum, ComplianceIssue, IssueStatusEnum, Employee

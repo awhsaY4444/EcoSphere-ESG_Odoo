@@ -9,12 +9,9 @@ import Gamification from "./pages/Gamification";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
-<<<<<<< HEAD
-=======
 import EcoTwin from "./pages/EcoTwin";
 import CarbonDNA from "./pages/CarbonDNA";
 import EcoPilot from "./pages/EcoPilot";
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 import Layout from "./components/Layout";
 
 function App() {

@@ -5,7 +5,8 @@ from models import (
     Badge, Reward, CarbonTransaction, CSRActivity, EmployeeParticipation, Challenge,
     ChallengeParticipation, PolicyAcknowledgement, Audit, ComplianceIssue, DepartmentScore,
     Notification, RewardRedemption, RoleEnum, CategoryTypeEnum, SourceTypeEnum,
-    ApprovalStatusEnum, ChallengeStatusEnum, SeverityEnum, IssueStatusEnum, ProductESGProfile
+    ApprovalStatusEnum, ChallengeStatusEnum, SeverityEnum, IssueStatusEnum, ProductESGProfile,
+    VerifiedImpact
 )
 from passlib.context import CryptContext
 from datetime import datetime, timedelta

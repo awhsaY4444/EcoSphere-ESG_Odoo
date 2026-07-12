@@ -1,10 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
-<<<<<<< HEAD
-import { LayoutDashboard, Leaf, Users, Shield, Trophy, FileText, Settings, LogOut, Bell, Earth, Info, X } from 'lucide-react';
-=======
 import { LayoutDashboard, Leaf, Users, Shield, Trophy, FileText, Settings, LogOut, Bell, Earth, Info, X, Brain, Fingerprint, Compass } from 'lucide-react';
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 import api from '../api';
 import { toast } from '../utils/toast';
 

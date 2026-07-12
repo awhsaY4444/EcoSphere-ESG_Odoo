@@ -1,9 +1,5 @@
 import { useState, useEffect } from 'react';
-<<<<<<< HEAD
 import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
-=======
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
 
@@ -62,20 +58,7 @@ export default function Dashboard() {
           name: monthNames[d.getMonth()],
           value: 0
         });
-<<<<<<< HEAD
-        
-        const sortedDepts = deptsRes.data
-          .sort((a: any, b: any) => b.score - a.score)
-          .map((d: any) => ({ name: d.code, score: d.score }));
-          
-        setDeptRankingData(sortedDepts);
-      } catch (err) {
-        console.error("Error fetching dashboard data:", err);
-      } finally {
-        // Add artificial delay for enterprise feel of loading
-        setTimeout(() => setLoading(false), 800);
-=======
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
+
       }
       
       txs.forEach((tx: any) => {
@@ -172,19 +155,11 @@ export default function Dashboard() {
     <div className="space-y-6 animate-in fade-in duration-700">
 
       {/* KPI Cards */}
-<<<<<<< HEAD
-      <div className="grid grid-cols-4 gap-6">
-        <div className="glass-panel p-6 rounded-2xl relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <h3 className="text-sm font-semibold text-gray-400 mb-2 flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse-slow"></div> Environmental
-=======
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="glass-panel p-6 rounded-2xl relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           <h3 className="text-sm font-semibold text-gray-400 mb-2 flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div> Environmental Score
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
           </h3>
           <div className="flex items-end gap-2">
             <span className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">{scores.env}</span>
@@ -195,11 +170,7 @@ export default function Dashboard() {
         <div className="glass-panel p-6 rounded-2xl relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           <h3 className="text-sm font-semibold text-gray-400 mb-2 flex items-center gap-2">
-<<<<<<< HEAD
-            <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse-slow"></div> Social
-=======
             <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div> Social Score
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
           </h3>
           <div className="flex items-end gap-2">
             <span className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-600">{scores.social}</span>
@@ -210,11 +181,7 @@ export default function Dashboard() {
         <div className="glass-panel p-6 rounded-2xl relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           <h3 className="text-sm font-semibold text-gray-400 mb-2 flex items-center gap-2">
-<<<<<<< HEAD
-            <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse-slow"></div> Governance
-=======
             <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></div> Governance Score
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
           </h3>
           <div className="flex items-end gap-2">
             <span className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-600">{scores.gov}</span>
@@ -235,19 +202,6 @@ export default function Dashboard() {
       </div>
 
       {/* Charts Section */}
-<<<<<<< HEAD
-      <div className="grid grid-cols-3 gap-6">
-        <div className="col-span-2 glass-panel p-6 rounded-2xl">
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="text-base font-semibold text-gray-200 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]"></span> Emissions Trend (12 mo)
-            </h3>
-            <span className="text-xs font-medium px-3 py-1 bg-white/5 border border-white/10 rounded-full text-green-400">tCO2e Prediction Model</span>
-          </div>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={emissionsData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-=======
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="col-span-1 lg:col-span-2 glass-panel p-6 rounded-2xl">
           <div className="flex justify-between items-center mb-6">
@@ -259,7 +213,6 @@ export default function Dashboard() {
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={emissionsTrend} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
                 <defs>
                   <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#10b981" stopOpacity={0.3}/>
@@ -270,11 +223,7 @@ export default function Dashboard() {
                 <XAxis dataKey="name" stroke="#71717a" tick={{fill: '#71717a', fontSize: 12}} axisLine={false} tickLine={false} />
                 <YAxis stroke="#71717a" tick={{fill: '#71717a', fontSize: 12}} axisLine={false} tickLine={false} />
                 <Tooltip 
-<<<<<<< HEAD
-                  contentStyle={{backgroundColor: 'rgba(24, 24, 27, 0.9)', borderColor: 'rgba(255,255,255,0.1)', borderRadius: '8px', backdropFilter: 'blur(10px)'}} 
-=======
-                  contentStyle={{backgroundColor: 'rgba(24, 24, 27, 0.9)', borderColor: 'rgba(255,255,255,0.1)', borderRadius: '12px', backdropFilter: 'blur(10px)'}} 
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
+                  contentStyle={{backgroundColor: 'rgba(24, 24, 27, 0.9)', borderColor: 'rgba(255,255,255,0.1)', borderRadius: '12px', backdropFilter: 'blur(10px)'}}
                   itemStyle={{color: '#fff'}}
                 />
                 <Area type="monotone" dataKey="value" stroke="#10b981" strokeWidth={3} fillOpacity={1} fill="url(#colorValue)" />
@@ -305,85 +254,6 @@ export default function Dashboard() {
       </div>
 
       {/* Bottom Section */}
-<<<<<<< HEAD
-      <div className="grid grid-cols-3 gap-6">
-        
-        {/* Eco-AI Insights Panel */}
-        <div className="col-span-1 glass-panel p-6 rounded-2xl border border-indigo-500/20 shadow-[0_0_20px_rgba(99,102,241,0.05)] flex flex-col relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-[30px]"></div>
-          <h3 className="text-base font-semibold text-indigo-300 mb-4 flex items-center gap-2 relative z-10">
-            <span>✨</span> Eco-AI Insights
-          </h3>
-          <div className="flex-1 space-y-4 relative z-10">
-            <div className="bg-indigo-500/10 border border-indigo-500/20 p-4 rounded-xl">
-              <p className="text-xs text-indigo-200 font-medium mb-1">Anomaly Detected</p>
-              <p className="text-sm text-gray-300">We noticed a 15% spike in Scope 1 emissions in the Logistics department this week. Recommend investigating fleet fuel usage.</p>
-            </div>
-            <div className="bg-green-500/10 border border-green-500/20 p-4 rounded-xl">
-              <p className="text-xs text-green-300 font-medium mb-1">Predictive Analytics</p>
-              <p className="text-sm text-gray-300">Based on current trajectory, you are 92% likely to meet your Q3 zero-waste goals ahead of schedule.</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-span-1 glass-panel p-6 rounded-2xl">
-          <h3 className="text-base font-semibold text-gray-200 mb-6 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-gray-400"></span> Recent Activity Feed
-          </h3>
-          <div className="space-y-4">
-            <div className="flex items-start gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer">
-              <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 shrink-0">✓</div>
-              <div>
-                <p className="text-sm text-gray-200 font-medium">Priya completed 'Zero Waste Week'</p>
-                <p className="text-xs text-gray-500 mt-0.5">2 hours ago • Gamification</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer">
-              <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400 shrink-0">⚠️</div>
-              <div>
-                <p className="text-sm text-gray-200 font-medium">New compliance issue flagged in Logistics</p>
-                <p className="text-xs text-gray-500 mt-0.5">5 hours ago • Governance</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer">
-              <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">📊</div>
-              <div>
-                <p className="text-sm text-gray-200 font-medium">42 new Carbon Transactions synced</p>
-                <p className="text-xs text-gray-500 mt-0.5">Yesterday • Environmental</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-span-1 glass-panel p-6 rounded-2xl flex flex-col justify-between">
-          <div>
-            <h3 className="text-base font-semibold text-gray-200 mb-6 flex items-center gap-2">
-              <span className="text-orange-400">⚡</span> Quick Actions
-            </h3>
-            <div className="space-y-3">
-              <button onClick={() => navigate('/environmental')} className="w-full relative overflow-hidden group bg-[#18181b] border border-white/10 hover:border-green-500/50 rounded-xl p-4 text-left transition-all">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-green-500/10 rounded-full blur-[20px] group-hover:bg-green-500/20 transition-colors"></div>
-                <div className="flex justify-between items-center relative z-10">
-                  <span className="font-semibold text-gray-200 group-hover:text-white transition-colors">Environmental Metrics</span>
-                  <span className="text-gray-500 group-hover:text-green-400 transition-colors">→</span>
-                </div>
-              </button>
-              <button onClick={() => navigate('/gamification')} className="w-full relative overflow-hidden group bg-[#18181b] border border-white/10 hover:border-orange-500/50 rounded-xl p-4 text-left transition-all">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-orange-500/10 rounded-full blur-[20px] group-hover:bg-orange-500/20 transition-colors"></div>
-                <div className="flex justify-between items-center relative z-10">
-                  <span className="font-semibold text-gray-200 group-hover:text-white transition-colors">Gamification Hub</span>
-                  <span className="text-gray-500 group-hover:text-orange-400 transition-colors">→</span>
-                </div>
-              </button>
-              <button onClick={() => navigate('/reports')} className="w-full relative overflow-hidden group bg-[#18181b] border border-white/10 hover:border-blue-500/50 rounded-xl p-4 text-left transition-all">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 rounded-full blur-[20px] group-hover:bg-blue-500/20 transition-colors"></div>
-                <div className="flex justify-between items-center relative z-10">
-                  <span className="font-semibold text-gray-200 group-hover:text-white transition-colors">ESG Reports</span>
-                  <span className="text-gray-500 group-hover:text-blue-400 transition-colors">→</span>
-                </div>
-              </button>
-            </div>
-=======
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
         {/* EcoPilot Insights Panel */}
@@ -405,7 +275,6 @@ export default function Dashboard() {
             >
               Consult EcoPilot Assistant <span>→</span>
             </button>
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
           </div>
         </div>
 

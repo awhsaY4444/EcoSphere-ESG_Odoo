@@ -6,10 +6,7 @@ from logic import APP_SETTINGS
 
 router = APIRouter(tags=["scores"])
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 @router.get("/department/{dept_id}")
 def get_department_score(dept_id: int, session: Session = Depends(get_session)):
     from routers.environmental import calculate_and_save_department_score

@@ -103,9 +103,6 @@ def create_product(product: dict, session: Session = Depends(get_session),
     session.commit()
     session.refresh(new_product)
     return new_product
-<<<<<<< HEAD
-=======
-
 @router.put("/products/{product_id}")
 def update_product(product_id: int, product_data: dict, session: Session = Depends(get_session),
                    current_user: Employee = Depends(require_role([RoleEnum.Admin]))):
@@ -139,4 +136,3 @@ def delete_product(product_id: int, session: Session = Depends(get_session),
     session.delete(product)
     session.commit()
     return {"ok": True}
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
