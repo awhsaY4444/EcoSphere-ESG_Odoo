@@ -72,6 +72,8 @@ class Employee(SQLModel, table=True):
     xp_total: int = Field(default=0)
     points_balance: int = Field(default=0)
     status: StatusEnum = Field(default=StatusEnum.Active)
+    phone: Optional[str] = Field(default="")
+    bio: Optional[str] = Field(default="")
 
     department: Optional[Department] = Relationship(back_populates="employees", sa_relationship_kwargs={"foreign_keys": "[Employee.dept_id]"})
 
@@ -117,6 +119,13 @@ class Reward(SQLModel, table=True):
     description: str
     points_required: int
     stock: int
+    status: StatusEnum = Field(default=StatusEnum.Active)
+
+class ProductESGProfile(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str = Field(index=True)
+    carbon_footprint_per_unit: float
+    sustainability_rating: str
     status: StatusEnum = Field(default=StatusEnum.Active)
 
 # Transactional Data Models

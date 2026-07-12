@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@react-oauth/google": "^0.13.5",
     "autoprefixer": "^10.5.2",
     "axios": "^1.18.1",
+    "html2pdf.js": "^0.14.0",
     "lucide-react": "^1.24.0",
     "postcss": "^8.5.17",
     "react": "^19.2.7",
@@ -22,6 +24,7 @@
     "tailwindcss": "^4.3.2"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.2",
     "@types/node": "^24.13.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",

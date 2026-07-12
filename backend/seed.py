@@ -5,7 +5,7 @@ from models import (
     Badge, Reward, CarbonTransaction, CSRActivity, EmployeeParticipation, Challenge,
     ChallengeParticipation, PolicyAcknowledgement, Audit, ComplianceIssue, DepartmentScore,
     Notification, RewardRedemption, RoleEnum, CategoryTypeEnum, SourceTypeEnum,
-    ApprovalStatusEnum, ChallengeStatusEnum, SeverityEnum, IssueStatusEnum
+    ApprovalStatusEnum, ChallengeStatusEnum, SeverityEnum, IssueStatusEnum, ProductESGProfile
 )
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
@@ -37,13 +37,41 @@ def seed_data():
         session.refresh(ops)
 
         # Employees
-        admin = Employee(name="Admin User", email="admin@eco.com", password_hash=get_password_hash("admin123"), role=RoleEnum.Admin, dept_id=hq.id)
-        hr_head = Employee(name="HR Head", email="hrhead@eco.com", password_hash=get_password_hash("hr123"), role=RoleEnum.DeptHead, dept_id=hr.id)
-        it_head = Employee(name="IT Head", email="ithead@eco.com", password_hash=get_password_hash("it123"), role=RoleEnum.DeptHead, dept_id=it.id)
-        auditor = Employee(name="Global Auditor", email="audit@eco.com", password_hash=get_password_hash("audit123"), role=RoleEnum.Auditor, dept_id=hq.id)
-        emp1 = Employee(name="Alice Smith", email="alice@eco.com", password_hash=get_password_hash("emp123"), dept_id=it.id, xp_total=50, points_balance=100)
-        emp2 = Employee(name="Bob Jones", email="bob@eco.com", password_hash=get_password_hash("emp123"), dept_id=ops.id)
-        emp3 = Employee(name="Charlie Brown", email="charlie@eco.com", password_hash=get_password_hash("emp123"), dept_id=ops.id)
+        admin = Employee(
+            name="Admin User", email="admin@eco.com", password_hash=get_password_hash("admin123"),
+            role=RoleEnum.Admin, dept_id=hq.id,
+            bio="Platform administrator and ESG program lead. Oversees all sustainability initiatives, department score targets, and governance compliance across the organization."
+        )
+        hr_head = Employee(
+            name="HR Head", email="hrhead@eco.com", password_hash=get_password_hash("hr123"),
+            role=RoleEnum.DeptHead, dept_id=hr.id,
+            bio="Head of Human Resources with a focus on building an inclusive, diverse, and sustainability-conscious workplace. Champions employee well-being programs and drives CSR participation across all departments."
+        )
+        it_head = Employee(
+            name="IT Head", email="ithead@eco.com", password_hash=get_password_hash("it123"),
+            role=RoleEnum.DeptHead, dept_id=it.id,
+            bio="Technology leader committed to green IT practices. Working to reduce the digital carbon footprint by optimizing server energy usage, promoting remote collaboration, and deploying energy-efficient hardware across the IT department."
+        )
+        auditor = Employee(
+            name="Global Auditor", email="audit@eco.com", password_hash=get_password_hash("audit123"),
+            role=RoleEnum.Auditor, dept_id=hq.id,
+            bio="Independent governance auditor responsible for ensuring organizational compliance with ESG policies. Conducts quarterly reviews and raises compliance issues to ensure accountability at every level of the company."
+        )
+        emp1 = Employee(
+            name="Alice Smith", email="alice@eco.com", password_hash=get_password_hash("emp123"),
+            dept_id=it.id, xp_total=50, points_balance=100,
+            bio="Software engineer and passionate sustainability advocate. Active participant in zero-waste and energy-saving challenges. Believes technology can be a powerful force for positive environmental change."
+        )
+        emp2 = Employee(
+            name="Bob Jones", email="bob@eco.com", password_hash=get_password_hash("emp123"),
+            dept_id=ops.id,
+            bio="Operations specialist focused on supply chain efficiency and reducing fleet emissions. Exploring ways to optimize logistics routes to cut diesel consumption and lower the department's carbon footprint."
+        )
+        emp3 = Employee(
+            name="Charlie Brown", email="charlie@eco.com", password_hash=get_password_hash("emp123"),
+            dept_id=ops.id,
+            bio="Facilities coordinator with a passion for waste reduction. Champions recycling programs on-site and is working towards the Zero Waste Lunch challenge. Believes small daily habits create the biggest long-term impact."
+        )
         session.add_all([admin, hr_head, it_head, auditor, emp1, emp2, emp3])
         session.commit()
         session.refresh(emp1)
@@ -70,7 +98,15 @@ def seed_data():
         badge_novice = Badge(name="Eco Novice", description="Earned 100 XP", unlock_rule_json=json.dumps({"metric": "xp_total", "operator": ">=", "value": 100}), icon="leaf")
         badge_master = Badge(name="Eco Master", description="Completed 3 challenges", unlock_rule_json=json.dumps({"metric": "completed_challenges", "operator": ">=", "value": 3}), icon="tree")
         badge_wealthy = Badge(name="Points Hoarder", description="Accumulate 500 points", unlock_rule_json=json.dumps({"metric": "points_balance", "operator": ">=", "value": 500}), icon="coins")
-        session.add_all([badge_novice, badge_master, badge_wealthy])
+        
+        # Seed Badges
+        b1 = Badge(name="Green Beginner", description="Join your first CSR activity", unlock_rule_json='{"metric": "completed_challenges", "operator": ">=", "value": 1}', icon="🌱")
+        
+        # Seed Products
+        p1 = ProductESGProfile(name="Eco-Friendly Notebook", carbon_footprint_per_unit=2.5, sustainability_rating="A")
+        
+        session.add_all([badge_novice, badge_master, badge_wealthy, b1, p1])
+        session.commit()
 
         # Rewards
         reward_mug = Reward(name="Eco-Friendly Mug", description="Reusable coffee mug", points_required=50, stock=20)

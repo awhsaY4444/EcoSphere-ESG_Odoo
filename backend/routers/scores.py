@@ -6,7 +6,7 @@ from logic import APP_SETTINGS
 
 router = APIRouter(tags=["scores"])
 
-@router.get("/scores/department/{dept_id}")
+@router.get("/department/{dept_id}")
 def get_department_score(dept_id: int, session: Session = Depends(get_session)):
     # For a real system we would calculate this based on underlying metrics.
     # For the hackathon, we fetch the latest stored score and apply weights.
@@ -31,7 +31,7 @@ def get_department_score(dept_id: int, session: Session = Depends(get_session)):
         "weighted_total_score": dept_total_score
     }
 
-@router.get("/scores/departments")
+@router.get("/departments")
 def get_all_department_scores(session: Session = Depends(get_session)):
     departments = session.exec(select(Department)).all()
     results = []
@@ -54,7 +54,7 @@ def get_all_department_scores(session: Session = Depends(get_session)):
             })
     return results
 
-@router.get("/scores/overall")
+@router.get("/overall")
 def get_overall_score(session: Session = Depends(get_session)):
     # overall_esg_score = average(all dept_total_scores) — weighted by employee_count
     departments = session.exec(select(Department)).all()

@@ -13,3 +13,12 @@ frontend/.env*
 .DS_Store
 .vscode/
 .idea/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+backend/database.db
+backend/venv/
+node_modules/
+dist/
+.env

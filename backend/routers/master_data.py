@@ -55,3 +55,19 @@ def get_badges(session: Session = Depends(get_session)):
 @router.get("/rewards", response_model=List[Reward])
 def get_rewards(session: Session = Depends(get_session)):
     return session.exec(select(Reward)).all()
+
+# Products
+@router.get("/products")
+def get_products(session: Session = Depends(get_session)):
+    from models import ProductESGProfile
+    return session.exec(select(ProductESGProfile)).all()
+
+@router.post("/products")
+def create_product(product: dict, session: Session = Depends(get_session),
+                   current_user: Employee = Depends(require_role([RoleEnum.Admin]))):
+    from models import ProductESGProfile
+    new_product = ProductESGProfile(**product)
+    session.add(new_product)
+    session.commit()
+    session.refresh(new_product)
+    return new_product

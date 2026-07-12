@@ -31,3 +31,54 @@ def create_carbon_transaction(tx: CarbonTransaction, session: Session = Depends(
     session.commit()
     session.refresh(tx)
     return tx
+
+@router.get("/goals")
+def get_environmental_goals(session: Session = Depends(get_session)):
+    from models import EnvironmentalGoal
+    # For hackathon MVP we just return all goals
+    goals = session.exec(select(EnvironmentalGoal)).all()
+    # Add fake progress formatting for frontend mockup compatibility
+    results = []
+    for g in goals:
+        progress = int((g.current_value / g.target_value) * 100) if g.target_value > 0 else 0
+        status = "Completed" if progress >= 100 else ("Active" if progress > 0 else "Draft")
+        results.append({
+            "id": g.id,
+            "name": g.title,
+            "dept": "Department " + str(g.dept_id) if g.dept_id else "All",
+            "target": str(g.target_value) + " " + g.target_metric,
+            "current": str(g.current_value) + " " + g.target_metric,
+            "progress": progress,
+            "deadline": g.deadline.strftime("%Y-%m-%d"),
+            "status": status,
+            "statusColor": "border-green-500 text-green-500" if status == "Completed" else "border-blue-500 text-blue-500"
+        })
+    return results
+
+@router.post("/goals")
+def create_environmental_goal(goal: dict, session: Session = Depends(get_session)):
+    from models import EnvironmentalGoal
+    from datetime import datetime
+    new_goal = EnvironmentalGoal(
+        title=goal.get("title"),
+        target_metric=goal.get("target_metric"),
+        target_value=goal.get("target_value"),
+        current_value=0.0,
+        deadline=datetime.strptime(goal.get("deadline"), "%Y-%m-%d"),
+        dept_id=goal.get("dept_id")
+    )
+    session.add(new_goal)
+    session.commit()
+    session.refresh(new_goal)
+    return new_goal
+
+@router.delete("/goals/{goal_id}")
+def delete_environmental_goal(goal_id: int, session: Session = Depends(get_session)):
+    from models import EnvironmentalGoal
+    goal = session.exec(select(EnvironmentalGoal).where(EnvironmentalGoal.id == goal_id)).first()
+    if not goal:
+        raise HTTPException(status_code=404, detail="Goal not found")
+    session.delete(goal)
+    session.commit()
+    return {"ok": True}
+

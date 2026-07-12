@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Environmental from "./pages/Environmental";
 import Social from "./pages/Social";
@@ -7,6 +8,7 @@ import Governance from "./pages/Governance";
 import Gamification from "./pages/Gamification";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
+import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Navigate to="/login" replace />} />
         
         {/* Protected Routes */}
         <Route path="/" element={<Layout />}>
@@ -25,6 +29,7 @@ function App() {
           <Route path="gamification" element={<Gamification />} />
           <Route path="reports" element={<Reports />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
       </Routes>
     </Router>
