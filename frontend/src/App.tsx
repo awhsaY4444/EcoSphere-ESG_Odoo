@@ -9,6 +9,12 @@ import Gamification from "./pages/Gamification";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
+<<<<<<< HEAD
+=======
+import EcoTwin from "./pages/EcoTwin";
+import CarbonDNA from "./pages/CarbonDNA";
+import EcoPilot from "./pages/EcoPilot";
+>>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 import Layout from "./components/Layout";
 
 function App() {
@@ -24,6 +30,9 @@ function App() {
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="environmental" element={<Environmental />} />
+          <Route path="ecotwin" element={<EcoTwin />} />
+          <Route path="carbon-dna" element={<CarbonDNA />} />
+          <Route path="ecopilot" element={<EcoPilot />} />
           <Route path="social" element={<Social />} />
           <Route path="governance" element={<Governance />} />
           <Route path="gamification" element={<Gamification />} />

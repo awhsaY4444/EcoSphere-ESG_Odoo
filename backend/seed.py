@@ -129,8 +129,42 @@ def seed_data():
         issue1 = ComplianceIssue(audit_id=audit1.id, severity=SeverityEnum.High, description="Improper waste disposal documented in site B.", owner_id=admin.id, due_date=datetime.utcnow()-timedelta(days=2), status=IssueStatusEnum.Open)
         issue2 = ComplianceIssue(audit_id=audit1.id, severity=SeverityEnum.Medium, description="Missing safety training logs.", owner_id=emp2.id, due_date=datetime.utcnow()+timedelta(days=10), status=IssueStatusEnum.In_Progress)
         session.add_all([issue1, issue2])
-        
         session.commit()
+
+        # Seed Carbon Transactions
+        tx1 = CarbonTransaction(dept_id=ops.id, source_type=SourceTypeEnum.Fleet, source_ref_id="Truck-F1", quantity=1000.0, emission_factor_id=ef_diesel.id, co2e_calculated=1000.0 * 2.68, auto_calculated=True, date=datetime.utcnow() - timedelta(days=20))
+        tx2 = CarbonTransaction(dept_id=ops.id, source_type=SourceTypeEnum.Fleet, source_ref_id="Truck-F2", quantity=1500.0, emission_factor_id=ef_diesel.id, co2e_calculated=1500.0 * 2.68, auto_calculated=True, date=datetime.utcnow() - timedelta(days=10))
+        tx3 = CarbonTransaction(dept_id=it.id, source_type=SourceTypeEnum.Purchase, source_ref_id="Server Room A", quantity=8000.0, emission_factor_id=ef_elec.id, co2e_calculated=8000.0 * 0.4, auto_calculated=True, date=datetime.utcnow() - timedelta(days=15))
+        tx4 = CarbonTransaction(dept_id=hr.id, source_type=SourceTypeEnum.Expense, source_ref_id="Office Supplies", quantity=250.0, emission_factor_id=ef_paper.id, co2e_calculated=250.0 * 0.9, auto_calculated=True, date=datetime.utcnow() - timedelta(days=5))
+        session.add_all([tx1, tx2, tx3, tx4])
+        session.commit()
+
+        # Seed Environmental Goals
+        goal1 = EnvironmentalGoal(title="Optimize Fleet Diesel Usage", target_metric="liter", target_value=2000.0, current_value=2500.0, deadline=datetime.utcnow() + timedelta(days=90), dept_id=ops.id)
+        goal2 = EnvironmentalGoal(title="Reduce Datacenter Electricity", target_metric="kWh", target_value=6000.0, current_value=8000.0, deadline=datetime.utcnow() + timedelta(days=60), dept_id=it.id)
+        session.add_all([goal1, goal2])
+        session.commit()
+
+        # Seed Policies
+        pol1 = ESGPolicy(title="Green Procurement Policy", body="All departments must prioritize vendors with verified sustainability ratings of B or higher. Paper usage must be minimized.", effective_date=datetime.utcnow() - timedelta(days=30))
+        pol2 = ESGPolicy(title="Server Energy Efficiency Standard", body="All server hardware must comply with Energy Star certification. Idle systems must be powered down.", effective_date=datetime.utcnow() - timedelta(days=30))
+        session.add_all([pol1, pol2])
+        session.commit()
+
+        # Seed Policy Acknowledgements
+        ack1 = PolicyAcknowledgement(policy_id=pol1.id, employee_id=emp1.id)
+        ack2 = PolicyAcknowledgement(policy_id=pol2.id, employee_id=emp1.id)
+        ack3 = PolicyAcknowledgement(policy_id=pol1.id, employee_id=emp2.id)
+        session.add_all([ack1, ack2, ack3])
+        session.commit()
+
+        # Calculate initial scores
+        from routers.environmental import calculate_and_save_department_score
+        calculate_and_save_department_score(session, hq.id)
+        calculate_and_save_department_score(session, it.id)
+        calculate_and_save_department_score(session, ops.id)
+        calculate_and_save_department_score(session, hr.id)
+
         print("Database seeded successfully.")
 
 if __name__ == "__main__":

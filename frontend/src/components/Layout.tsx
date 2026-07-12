@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
+<<<<<<< HEAD
 import { LayoutDashboard, Leaf, Users, Shield, Trophy, FileText, Settings, LogOut, Bell, Earth, Info, X } from 'lucide-react';
+=======
+import { LayoutDashboard, Leaf, Users, Shield, Trophy, FileText, Settings, LogOut, Bell, Earth, Info, X, Brain, Fingerprint, Compass } from 'lucide-react';
+>>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 import api from '../api';
 import { toast } from '../utils/toast';
 
@@ -122,6 +126,9 @@ export default function Layout() {
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: <LayoutDashboard size={18} /> },
     { name: 'Environmental', path: '/environmental', icon: <Leaf size={18} /> },
+    { name: 'EcoTwin Simulation', path: '/ecotwin', icon: <Brain size={18} /> },
+    { name: 'Carbon DNA Lineage', path: '/carbon-dna', icon: <Fingerprint size={18} /> },
+    { name: 'EcoPilot Assistant', path: '/ecopilot', icon: <Compass size={18} /> },
     { name: 'Social', path: '/social', icon: <Users size={18} /> },
     { name: 'Governance', path: '/governance', icon: <Shield size={18} /> },
     { name: 'Gamification', path: '/gamification', icon: <Trophy size={18} /> },

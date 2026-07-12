@@ -13,6 +13,7 @@ frontend/.env*
 .DS_Store
 .vscode/
 .idea/
+<<<<<<< HEAD
 __pycache__/
 *.pyc
 *.pyo
@@ -22,3 +23,8 @@ backend/venv/
 node_modules/
 dist/
 .env
+=======
+
+__pycache__/
+*.pyc
+>>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
