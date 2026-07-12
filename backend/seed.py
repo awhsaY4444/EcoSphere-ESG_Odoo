@@ -21,7 +21,17 @@ def seed_data():
     print("Rebuilding database schemas...")
     from sqlmodel import SQLModel
     # Drop all tables first to cleanly update SQLite column changes
-    SQLModel.metadata.drop_all(engine)
+    try:
+        SQLModel.metadata.drop_all(engine)
+    except Exception as e:
+        print(f"Standard drop failed ({e}), attempting CASCADE drop for PostgreSQL...")
+        from sqlalchemy import text
+        with engine.connect() as conn:
+            table_names = list(SQLModel.metadata.tables.keys())
+            if table_names:
+                tables_str = ", ".join([f'"{name}"' for name in table_names])
+                conn.execute(text(f"DROP TABLE IF EXISTS {tables_str} CASCADE;"))
+                conn.commit()
     create_db_and_tables()
 
     with Session(engine) as session:
