@@ -1,22 +1,11 @@
 # 🌍 EcoSphere_ESG
 
-<<<<<<< HEAD
 **ESG Intelligence & Sustainability Management Platform**
 
 > Measure → Trace → Understand → Predict → Simulate → Act → Reward
 
 EcoSphere_ESG is an intelligent **Environmental, Social, and Governance (ESG) Management Platform** that helps organizations measure, manage, analyze, and improve their sustainability performance through a single unified ERP-integrated system — combining environmental monitoring, employee participation, governance compliance, gamification, and explainable AI-driven insights.
 
-=======
-### ESG Intelligence & Sustainability Management Platform
-
-> **Measure → Trace → Understand → Predict → Simulate → Act → Reward**
-
-EcoSphere_ESG is an intelligent **Environmental, Social, and Governance (ESG) Management Platform** that helps organizations measure, manage, analyze, and improve their sustainability performance through a single unified ERP-integrated system — combining environmental monitoring, employee participation, governance compliance, gamification, and explainable AI-driven insights.
-
----
-
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 ## Table of Contents
 
 - [Problem Statement](#problem-statement)
@@ -33,11 +22,6 @@ EcoSphere_ESG is an intelligent **Environmental, Social, and Governance (ESG) Ma
 - [User Roles](#user-roles)
 - [Screens & Navigation](#screens--navigation)
 
-<<<<<<< HEAD
-=======
----
-
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 ## Problem Statement
 
 Organizations are increasingly expected to monitor carbon emissions, promote employee well-being, manage sustainability initiatives, and maintain governance compliance. However, ESG reporting today is typically:
@@ -48,13 +32,7 @@ Organizations are increasingly expected to monitor carbon emissions, promote emp
 - Reactive rather than predictive
 - Hard to trace back to the individual operational activity that caused it
 
-<<<<<<< HEAD
 EcoSphere_ESG solves this by embedding ESG management directly into day-to-day operations and turning raw ESG data into actionable, explainable intelligence — not just another dashboard bolted onto existing systems.
-=======
-**EcoSphere_ESG** solves this by embedding ESG management directly into day-to-day operations and turning raw ESG data into actionable, explainable intelligence — not just another dashboard bolted onto existing systems.
-
----
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 
 ## Our Solution
 
@@ -69,23 +47,12 @@ EcoSphere centralizes the four ESG pillars into one platform:
 
 All four pillars roll up into a single, weighted **Overall ESG Score** per department and organization-wide.
 
-<<<<<<< HEAD
 ## Key Innovations
 
 ### 🔮 EcoTwin — ESG Digital Twin & What-If Simulator
 Lets organizations simulate sustainability decisions before implementing them.
 
 *"What if diesel consumption is reduced by 30%?"*
-=======
----
-
-## Key Innovations
-
-### 🔮 EcoTwin — ESG Digital Twin & What-If Simulator
-Lets organizations simulate sustainability decisions **before** implementing them.
-
-> *"What if diesel consumption is reduced by 30%?"*
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 
 EcoTwin projects:
 - Carbon reduction impact
@@ -96,7 +63,6 @@ EcoTwin projects:
 Multiple scenarios can be run side by side to identify the highest-impact strategy before committing resources.
 
 ### 🧭 EcoPilot — Explainable ESG Intelligence Assistant
-<<<<<<< HEAD
 A natural-language assistant that answers questions using the organization's actual ESG data — not generic advice.
 
 Example questions it answers:
@@ -104,46 +70,16 @@ Example questions it answers:
 - "Which department needs immediate attention?"
 - "Which environmental goal is most likely to fail?"
 - "What are the highest-impact actions we can take right now?"
-=======
-A natural-language assistant that answers questions using the organization's **actual** ESG data — not generic advice.
-
-Example questions it answers:
-- *"Why did our ESG score decrease this month?"*
-- *"Which department needs immediate attention?"*
-- *"Which environmental goal is most likely to fail?"*
-- *"What are the highest-impact actions we can take right now?"*
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 
 Every answer is grounded in and cites the underlying ESG records (transactions, scores, audits) that produced it — no black-box claims.
 
 ### 🧬 Carbon DNA — End-to-End Emission Traceability
 Traces any emission figure from the top-level dashboard all the way down to the exact operational record that generated it:
 
-<<<<<<< HEAD
 `Organization Emissions` → `Logistics Department` → `Fleet Operations` → `Vehicle / Source Record` → `Diesel Transaction` → `Quantity × Emission Factor = CO₂e`
 
 This gives auditors and sustainability officers a fully explainable chain of custody for every gram of reported CO₂e — answering "where did this number come from?" with a real answer, not a re-aggregation.
 
-=======
-```
-Organization Emissions
-        ↓
-Logistics Department
-        ↓
-Fleet Operations
-        ↓
-Vehicle / Source Record
-        ↓
-Diesel Transaction
-        ↓
-Quantity × Emission Factor = CO₂e
-```
-
-This gives auditors and sustainability officers a fully explainable chain of custody for every gram of reported CO₂e — answering "where did this number come from?" with a real answer, not a re-aggregation.
-
----
-
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 ## Core Modules
 
 ### 1. Environmental
@@ -166,11 +102,7 @@ This gives auditors and sustainability officers a fully explainable chain of cus
 - Compliance Issues (severity, ownership, due dates)
 
 ### 4. Gamification
-<<<<<<< HEAD
 - Challenges with full lifecycle: Draft → Active → Under Review → Completed, or Archived at any point
-=======
-- Challenges with full lifecycle: `Draft → Active → Under Review → Completed`, or `Archived` at any point
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 - XP accumulation
 - Badges — auto-awarded when an employee's XP or completed-challenge count satisfies a Badge's Unlock Rule
 - Rewards — redeemable using earned XP/Points, subject to stock availability
@@ -179,17 +111,9 @@ This gives auditors and sustainability officers a fully explainable chain of cus
 ### 5. Settings & Administration
 - Departments management
 - Category management
-<<<<<<< HEAD
 - ESG Configuration (weightings, toggles — see Business Rules)
 - Notification Settings
 
-=======
-- ESG Configuration (weightings, toggles — see [Business Rules](#core-configuration--business-rules))
-- Notification Settings
-
----
-
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 ## Data Model
 
 ### Master Data
@@ -219,11 +143,6 @@ This gives auditors and sustainability officers a fully explainable chain of cus
 | **Compliance Issue** | Governance violations | Audit, Severity, Description, Owner, Due Date, Status |
 | **Department Score** | Aggregated ESG performance per department | Department, Environmental Score, Social Score, Governance Score, Total Score |
 
-<<<<<<< HEAD
-=======
----
-
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 ## Business Workflow
 
 ```
@@ -258,7 +177,6 @@ Overall ESG Score
 Organization Dashboard & Reports
 ```
 
-<<<<<<< HEAD
 ## Core Configuration & Business Rules
 
 These are in scope, not optional, since they directly support the core modules:
@@ -270,23 +188,6 @@ These are in scope, not optional, since they directly support the core modules:
 - **Badge Auto-Award (toggle)** — When enabled, a Badge is automatically assigned to an employee the moment their XP, completed-challenge count, or other tracked metric satisfies that Badge's Unlock Rule — no manual admin action required.
 - **Compliance Issue Ownership** — Every Compliance Issue must have an assigned Owner and a Due Date. Issues that pass their Due Date while still Open are flagged and feed the Notification System.
 
-=======
----
-
-## Core Configuration & Business Rules
-
-These are **in scope, not optional**, since they directly support the core modules:
-
-- **Reward Redemption** — Employees redeem earned Points/XP for a Reward from the catalog, subject to stock availability. Redemption atomically deducts the corresponding points from the employee's balance and decrements stock.
-- **Notification System** — Sends in-app and/or email notifications for: new Compliance Issue raised, CSR/Challenge approval decisions, Policy Acknowledgement reminders, and Badge unlocks. Configurable via Settings → Notification Settings.
-- **Auto Emission Calculation** *(toggle)* — When enabled, Carbon Transactions are calculated automatically from linked Purchase/Manufacturing/Expense/Fleet records using the relevant Emission Factor — no manual entry required.
-- **Evidence Requirement** *(toggle)* — When enabled, CSR Activity participation cannot be marked Approved without an attached proof file.
-- **Badge Auto-Award** *(toggle)* — When enabled, a Badge is automatically assigned to an employee the moment their XP, completed-challenge count, or other tracked metric satisfies that Badge's Unlock Rule — no manual admin action required.
-- **Compliance Issue Ownership** — Every Compliance Issue must have an assigned Owner and a Due Date. Issues that pass their Due Date while still Open are flagged and feed the Notification System.
-
----
-
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 ## Reports
 
 The platform generates:
@@ -298,10 +199,6 @@ The platform generates:
 - **Custom Report Builder** — combine filters below and export (PDF / Excel / CSV)
 
 Each report supports filtering by:
-<<<<<<< HEAD
-=======
-
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 - Department
 - Date Range
 - Module
@@ -309,28 +206,14 @@ Each report supports filtering by:
 - Challenge
 - ESG Category
 
-<<<<<<< HEAD
-=======
----
-
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 ## Tech Stack
 
 | Layer | Technology |
 |---|---|
-<<<<<<< HEAD
 | **Backend** | FastAPI (Python), SQLModel / SQLAlchemy |
 | **Database** | SQLite (dev) → PostgreSQL (production-ready) |
 | **Frontend** | React, Tailwind CSS, Recharts |
 | **Auth** | JWT-based authentication, Role-Based Access Control |
-=======
-| Backend | FastAPI (Python), SQLModel / SQLAlchemy |
-| Database | SQLite (dev) → PostgreSQL (production-ready) |
-| Frontend | React, Tailwind CSS, Recharts |
-| Auth | JWT-based authentication, Role-Based Access Control |
-
----
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 
 ## Project Structure
 
@@ -354,11 +237,6 @@ EcoSphere_ESG/
 └── README.md
 ```
 
-<<<<<<< HEAD
-=======
----
-
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 ## Getting Started
 
 ### Backend
@@ -366,13 +244,8 @@ EcoSphere_ESG/
 cd backend
 python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
-<<<<<<< HEAD
 python seed.py
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-=======
-python seed_data.py
-uvicorn app.main:app --reload
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 ```
 
 ### Frontend
@@ -381,16 +254,8 @@ cd frontend
 npm install
 npm run dev
 ```
-<<<<<<< HEAD
 The app will be available at `http://localhost:5173` (frontend) with the API at `http://localhost:8000`.
 
-=======
-
-The app will be available at `http://localhost:5173` (frontend) with the API at `http://localhost:8000`.
-
----
-
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 ## User Roles
 
 | Role | Permissions |
@@ -400,11 +265,6 @@ The app will be available at `http://localhost:5173` (frontend) with the API at 
 | **Employee** | Submits CSR/Challenge participation, views own XP/badges/leaderboard position, redeems rewards |
 | **Auditor** | Creates and runs audit cycles, raises compliance issues |
 
-<<<<<<< HEAD
-=======
----
-
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
 ## Screens & Navigation
 
 Sidebar-driven navigation grouped by module, matching the platform's core structure:
@@ -419,10 +279,4 @@ Sidebar-driven navigation grouped by module, matching the platform's core struct
 
 ---
 
-<<<<<<< HEAD
 *EcoSphere_ESG — turning ESG data into ESG intelligence.*
-=======
-<p align="center">
-  <i>EcoSphere_ESG — turning ESG data into ESG intelligence.</i>
-</p>
->>>>>>> 088d4c3 (feat: enhance EcoSphere ESG modules and intelligence features)
