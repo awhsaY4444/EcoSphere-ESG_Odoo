@@ -243,3 +243,21 @@ class VerifiedImpact(SQLModel, table=True):
     impact_metric: str  # "kg CO2e avoided", "kg waste reduced", "volunteer hours", "kWh saved"
     status: str = Field(default="Claimed")  # "Claimed", "Pending", "Verified", "Rejected"
     logged_at: datetime = Field(default_factory=datetime.utcnow)
+
+
+class GreenShieldClaim(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    claim_text: str
+    category: str
+    claim_type: str
+    claimed_value: str
+    verified_value: str
+    evidence_coverage: float
+    confidence_score: float
+    risk_level: str
+    status: str
+    recommendation: str
+    missing_evidence: str
+    evidence_used: str
+    verified_at: datetime = Field(default_factory=datetime.utcnow)
+

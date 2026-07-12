@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import create_db_and_tables
-from routers import auth, master_data, gamification, social, environmental, governance, scores, reports, settings, notifications
+from routers import auth, master_data, gamification, social, environmental, governance, scores, reports, settings, notifications, greenshield
 
 app = FastAPI(title="EcoSphere ESG Platform")
 
@@ -23,6 +23,8 @@ app.include_router(scores.router, prefix="/scores")
 app.include_router(reports.router)
 app.include_router(settings.router)
 app.include_router(notifications.router)
+app.include_router(greenshield.router, prefix="/greenshield")
+
 
 @app.on_event("startup")
 def on_startup():

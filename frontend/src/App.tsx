@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import EcoTwin from "./pages/EcoTwin";
 import CarbonDNA from "./pages/CarbonDNA";
 import EcoPilot from "./pages/EcoPilot";
+import GreenShield from "./pages/GreenShield";
 import Layout from "./components/Layout";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="ecotwin" element={<EcoTwin />} />
           <Route path="carbon-dna" element={<CarbonDNA />} />
           <Route path="ecopilot" element={<EcoPilot />} />
+          <Route path="greenshield" element={<GreenShield />} />
           <Route path="social" element={<Social />} />
           <Route path="governance" element={<Governance />} />
           <Route path="gamification" element={<Gamification />} />
@@ -43,3 +45,4 @@ function App() {
 }
 
 export default App;
+
